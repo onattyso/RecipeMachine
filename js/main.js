@@ -14,12 +14,29 @@ var foodImages = [
 ];
 
 
-var slotMachine = function () {
-	var randomFood = foodImages[Math.floor(Math.random()*foodImages.length)]; 
-	return $('#slotItem').addClass('item1').css({'background-image':'url(' + randomFood + ')'});
+var slotMachine1 = function () {
+	var item = foodImages[Math.floor(Math.random()*foodImages.length)];
+	console.log(item);
+	return $('#slotItem1').addClass('item1').css({'background-image':'url(' + item + ')'});
 };
 
-slotMachine();
+var slotMachine2 = function () {
+	var item = foodImages[Math.floor(Math.random()*foodImages.length)]; 
+	console.log(item);
+	return $('#slotItem2').addClass('item2').css({'background-image':'url(' + item + ')'});
+};
+
+var slotMachine3 = function () {
+	var item = foodImages[Math.floor(Math.random()*foodImages.length)]; 	
+	console.log(item);
+	return $('#slotItem3').addClass('item3').css({'background-image':'url(' + item + ')'});
+};
+
+$(document).click(function(){
+		slotMachine1();
+		slotMachine2();
+		slotMachine3();
+});
 
 // // IFTTT Slottt Machine by Jen Hamon
 // // jen@ifttt.com
