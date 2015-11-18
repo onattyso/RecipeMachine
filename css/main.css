@@ -97,17 +97,29 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+#slotMachine {
+    width: 100%;
+    height: 100%;
+}
 
+#slotItem {
+    margin: auto;
+    display: block;
+    width: 50%;
+    height: 50%;
+}
 
+.item1 {
 
+}
 
+.item2 {
+    
+}
 
-
-
-
-
-
-
+.item3 {
+    
+}
 
 
 
