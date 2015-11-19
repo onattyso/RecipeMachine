@@ -118,6 +118,9 @@ span {
     display: inline;
     font-weight: bold;
     font-size: 120px;
+    vertical-align: center;
+    height: 300;
+    line-height: 300;
 }
 
 #slotItem1 {
