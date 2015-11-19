@@ -34,11 +34,14 @@ var slotMachine3 = function () {
 
 $(document).click(function(){
 
+	// startAnimation();
+	// animate();
 
-//startAnimation();
-		//animate();
-
-		$( "#slotItem1" ).startAnimation( 300 ).delay( 800 ).stopAnimation( 400 );
+	var imageArray = foodImages[Math.floor(Math.random()*foodImages.length)];
+	// $( "#slotItem1" ).startAnimation( 300 ).delay( 800 ).stopAnimation( 400 );
+	$("#slotItem1").animate({top: -imageArray*150}, 3, 'swing', function() {
+		rotateContents($trigger, imageArray);
+	});
 });
 
 
@@ -53,14 +56,14 @@ function startAnimation(){
 }
 
 function stopAnimation(){
-	setInterval(animate, 30000);
+	setInterval(animate, 300);
 }
 
 function animate() {
 
-		slotMachine1();
-		slotMachine2();
-		slotMachine3();
+	slotMachine1();
+	slotMachine2();
+	slotMachine3();
 
   // var imageArray = randomSlotttIndex(foodImages.length);
   var imageArray = foodImages[Math.floor(Math.random()*foodImages.length)];
