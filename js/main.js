@@ -33,69 +33,73 @@ var slotMachine3 = function () {
 };
 
 $(document).click(function(){
+
+
+//startAnimation();
+		//animate();
+
+		$( "#slotItem1" ).startAnimation( 300 ).delay( 800 ).stopAnimation( 400 );
+});
+
+
+
+function randomSlotttIndex(max) {
+  var randIndex = (Math.random() * max | 0);
+  return (randIndex > 1) ? randIndex : randomSlotttIndex(max);
+}
+
+function startAnimation(){
+	setInterval(animate, 3);
+}
+
+function stopAnimation(){
+	setInterval(animate, 30000);
+}
+
+function animate() {
+
 		slotMachine1();
 		slotMachine2();
 		slotMachine3();
+
+  // var imageArray = randomSlotttIndex(foodImages.length);
+  var imageArray = foodImages[Math.floor(Math.random()*foodImages.length)];
+
+  $trigger.animate({top: -imageArray*150}, 500, 'swing', function () {
+     rotateContents($trigger, imageArray);
+  });
+
+}
+
+function rotateContents ($container, n) {
+    setTimeout(function () {
+      popPushNItems($container, n);
+      $container.css({top: 0});
+    }, 300);    
+}
+
+$(function () {
+  $trigger = $('#slotItem1 .item1');
+  buildSlotContents($trigger, foodImages);  
+  
+  
 });
 
-// // IFTTT Slottt Machine by Jen Hamon
-// // jen@ifttt.com
-// // github.com/jhamon
+
+function buildSlotContents ($container, imgURLArray) {
+  $items = imgURLArray.map(slotMachine1);
+  $container.append($items);
+}
+
+function popPushNItems ($container, n) {
+   // $children = $container.find('.slottt-machine-recipe__item');
+    $children = $container.find('.item1');
+    $children.slice(0, n).insertAfter($children.last());
+
+    if (n === $children.length) {
+      popPushNItems($container, 1);
+    }
+}
 
 
-// function foodItem (imgURL) {
-//     return $('<div>').addClass('slottt-machine-recipe__item')
-//                      .css({'background-image': 'url(' + imgURL + ')'})
-// }
 
-// function buildSlotContents ($container, imgURLArray) {
-//   $items = imgURLArray.map(buildSlotItem);
-//   $container.append($items);
-// }
-
-// function popPushNItems ($container, n) {
-//     $children = $container.find('.slottt-machine-recipe__item');
-//     $children.slice(0, n).insertAfter($children.last());
-
-//     if (n === $children.length) {
-//       popPushNItems($container, 1);
-//     }
-// }
-
-// // After the slide animation is complete, we want to pop some items off
-// // the front of the container and push them onto the end. This is
-// // so the animation can slide upward infinitely without adding
-// // inifinte div elements inside the container.
-// function rotateContents ($container, n) {
-//     setTimeout(function () {
-//       popPushNItems($container, n);
-//       $container.css({top: 0});
-//     }, 300);    
-// }
-
-// function randomSlotttIndex(max) {
-//   var randIndex = (Math.random() * max | 0);
-//   return (randIndex > 10) ? randIndex : randomSlotttIndex(max);
-// }
-
-// function animate() {
-//   var triggerIndex = randomSlotttIndex(triggers.length);
-//   var actionIndex = randomSlotttIndex(actions.length);
-
-//   $trigger.animate({top: -triggerIndex*150}, 500, 'swing', function () {
-//      rotateContents($trigger, triggerIndex);
-//   });
-
-//   $action.animate({top: -actionIndex*150}, 700, 'swing', function () {
-//     rotateContents($action, actionIndex);
-//   });
-// }
-
-// $(function () {
-//   $trigger = $('#trigger_slot .slottt-machine-recipe__items_container');
-//   buildSlotContents($trigger, triggers);  
-//   $action = $('#action_slot .slottt-machine-recipe__items_container');
-//   buildSlotContents($action, actions);
-  
-//   setInterval(animate, 3500);
-// });
