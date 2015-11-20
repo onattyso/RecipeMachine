@@ -1,5 +1,13 @@
 var recipename = "";
 var fruit;
+var go = true; 
+var counter = 0; 
+var interval1; 
+var interval2;
+var interval3;
+var foodItem1;
+var foodItem2;
+var foodItem3;
 
 var foodImages = [
 	"img/apple.jpg",
@@ -16,59 +24,84 @@ var foodImages = [
 
 var slotMachine1 = function () {
 	var item = foodImages[Math.floor(Math.random()*foodImages.length)];
-	console.log(item);
+	foodItem1 = item;
 	return $('#slotItem1').addClass('item1').css({'background-image':'url(' + item + ')'});
 };
 
 var slotMachine2 = function () {
 	var item = foodImages[Math.floor(Math.random()*foodImages.length)]; 
-	console.log(item);
+	foodItem2 = item;
 	return $('#slotItem2').addClass('item2').css({'background-image':'url(' + item + ')'});
 };
 
 var slotMachine3 = function () {
 	var item = foodImages[Math.floor(Math.random()*foodImages.length)]; 	
-	console.log(item);
+	foodItem3 = item;
 	return $('#slotItem3').addClass('item3').css({'background-image':'url(' + item + ')'});
 };
 
 $(document).click(function(){
+	
+	// set a bool here to make sure that we don't restart the animation while it's animating (go is set to true only after 3rd animation stops) 
+	if (go)
+	startAnimation();
 
+	setTimeout(stopAnimation1, 2000);
+	setTimeout(stopAnimation2, 2500);
+	setTimeout(stopAnimation3, 3000);
 
-//startAnimation();
-		//animate();
+	// counter++;
+	// console.log(counter);
 
-		$( "#slotItem1" ).startAnimation( 300 ).delay( 800 ).stopAnimation( 400 );
 });
 
 
-
-function randomSlotttIndex(max) {
-  var randIndex = (Math.random() * max | 0);
-  return (randIndex > 1) ? randIndex : randomSlotttIndex(max);
-}
-
 function startAnimation(){
-	setInterval(animate, 3);
+
+	interval1 = setInterval(animate1, 30);
+	interval2 = setInterval(animate2, 30);
+	interval3 = setInterval(animate3, 30);
+	console.log("start Animation");
+};
+
+function stopAnimation1(){
+	clearInterval(interval1);
 }
 
-function stopAnimation(){
-	setInterval(animate, 30000);
+function stopAnimation2(){
+	clearInterval(interval2);
 }
 
-function animate() {
+function stopAnimation3(){
 
-		slotMachine1();
-		slotMachine2();
-		slotMachine3();
+	counter++;
+ 	
+	console.log(foodItem1 + " " + foodItem2 + " " +  foodItem3);
 
-  // var imageArray = randomSlotttIndex(foodImages.length);
-  var imageArray = foodImages[Math.floor(Math.random()*foodImages.length)];
+ 	if (foodItem1 == foodItem2 && foodItem2 == foodItem3){
+ 		console.log("MATCH!");
+ 	}
+ 	else{
+ 		console.log("no match");
+ 		
+ 	}
 
-  $trigger.animate({top: -imageArray*150}, 500, 'swing', function () {
-     rotateContents($trigger, imageArray);
-  });
+ 	clearInterval(interval3);
+ 	console.log("animation " + counter + " stopped");
 
+ 	go = true;
+	
+};
+
+function animate1() {
+	slotMachine1();
+	go = false;
+}
+function animate2() {
+	slotMachine2();
+}
+function animate3() {
+	slotMachine3();
 }
 
 function rotateContents ($container, n) {
